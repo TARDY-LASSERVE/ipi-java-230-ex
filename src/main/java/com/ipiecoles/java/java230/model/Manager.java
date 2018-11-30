@@ -7,10 +7,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
+@Entity
 public class Manager extends Employe {
 
+	@OneToMany( mappedBy = "manager" )
 	private Set<Technicien> equipe = new HashSet();
+
+	private Integer performance;
 
 	public Manager(){
 
@@ -72,6 +80,15 @@ public class Manager extends Employe {
 
 	@Override
 	public String toString() {
-		return "Manager{} " + super.toString();
+		return "Manager{performance=" + performance +
+				"} " + super.toString();
+	}
+
+	public void setPerformance(Integer performance) {
+		this.performance = performance;
+	}
+
+	public Integer getPerformance() {
+		return performance;
 	}
 }
